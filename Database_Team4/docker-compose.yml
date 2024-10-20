@@ -1,0 +1,29 @@
+services:
+  # Database
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: team4elegant
+      MYSQL_DATABASE: Team4
+      MYSQL_USER: team4Member
+      MYSQL_PASSWORD: filltumtrong
+    volumes:
+    - mysql_data:/var/lib/mysql
+    ports:
+    - "8033:8033"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 8033
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
